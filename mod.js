@@ -64,7 +64,7 @@ fullwidth = {
     y:'\uff59',
     z:'\uff5a'
 }
-
+//test
 input.oninput = function(){
     var temp = input.value
     var temp2 = ''
