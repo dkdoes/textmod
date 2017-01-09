@@ -31,22 +31,15 @@ input.oninput = function(){
 
 output.onclick = function(){
     output.select()
-    var temp = document.execCommand('copy')
-    if(temp==true){
-        output.blur()
+    document.execCommand('selectAll')
+    var temp2 = document.execCommand('copy')
+    window.getSelection().removeAllRanges()
+    output.blur()
+    if(temp2==true){
         copyAlert.show()
         setTimeout(function(){copyAlert.fadeOut()},1500)
     }
     else{
-        document.execCommand('selectAll')
-        var temp2 = document.execCommand('copy')
-        output.blur()
-        if(temp2==true){
-            copyAlert.show()
-            setTimeout(function(){copyAlert.fadeOut()},1500)
-        }
-        else{
-            output.focus()
-        }
+        output.focus()
     }
 }
