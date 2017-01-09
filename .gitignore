@@ -1,2 +1,4 @@
 *.bat
 *.py
+server.js
+/node_modules/*

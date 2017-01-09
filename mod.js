@@ -1,5 +1,7 @@
 var input = document.getElementById("in")
 var output = document.getElementById("out")
+var copyAlert = $('#copyAlert')
+var test = document.getElementById("test")
 fullwidth = {
     0:'\uff10',
     1:'\uff11',
@@ -64,21 +66,47 @@ fullwidth = {
     y:'\uff59',
     z:'\uff5a'
 }
-//test
+
 input.oninput = function(){
     var temp = input.value
     var temp2 = ''
     for(var i=0;i<input.value.length;i++){
         if(input.value[i]==' '){
-            temp2+=input.value[i]+'\u200d '
+            temp2+='\u3000'
         }
         else if(fullwidth[input.value[i]]!=undefined){
-            temp2+=fullwidth[input.value[i]]+' '
+            temp2+=fullwidth[input.value[i]]+'\u3000'
         }
         else{
-            temp2+=input.value[i]+' '
+            temp2+=input.value[i]+'\u3000'
         }
     }
     temp2[temp2.length-1]==' '&&(temp2=temp2.substr(0,temp2.length-1))
     output.value = temp2
+    try{
+        output.scroll(0,output.scrollHeight)
+    }catch(err){
+        output.scrollTop = output.scrollHeight
+    }
+}
+
+output.onclick = function(){
+    output.select()
+    var temp = document.execCommand('copy')
+    if(temp==true){
+        copyAlert.show()
+        setTimeout(function(){copyAlert.fadeOut()},1500)
+    }
+    else{
+        document.execCommand('selectAll')
+        var temp2 = document.execCommand('copy')
+        output.blur()
+        if(temp2==true){
+            copyAlert.show()
+            setTimeout(function(){copyAlert.fadeOut()},1500)
+        }
+        else{
+            output.focus()
+        }
+    }
 }

@@ -3,7 +3,7 @@
 <head>
   <title>Text Mod</title>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -14,13 +14,17 @@
   <form>
     <div class="form-group">
       <label for="comment">Input:</label>
-      <textarea class="form-control" rows="5" id="in"></textarea>
+      <textarea class="form-control" rows="3" id="in"></textarea>
     </div>
     <div class="form-group">
       <label for="comment">Output:</label>
-      <textarea class="form-control" rows="5" id="out" value="‍"></textarea>
+      <textarea readonly class="form-control" rows="3" id="out" value="‍" contenteditable=true></textarea>
+    </div>
+    <div class="alert alert-success collapse" id="copyAlert">
+      <strong>Text copied!</strong>
     </div>
   </form>
 </div>
+<div id='test'></div>
 <script src="mod.js"></script>
 </body></html>
