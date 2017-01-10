@@ -11,9 +11,10 @@ fullwidth_replace_with = '\uff01\uff02\uff03\uff04\uff05\uff06\uff07\uff08\uff09
 
 input.oninput = function(){
     var temp = input.value
+    random_checkbox.checked && (temp = to_random(temp))
     fullwidth_checkbox.checked && (temp = to_fullwidth(temp))
     sad_checkbox.checked && (temp = to_sad(temp))
-    random_checkbox.checked && (temp = to_random(temp))
+    
     output.value = temp
     try{
         output.scroll(0,output.scrollHeight)
@@ -92,7 +93,7 @@ to_random = function(text_in){
             console.log(word)
             
             //pick a random spot in the word/characters
-            var spot = parseInt(Math.random()*(word.length-2))+1
+            var spot = parseInt(Math.random()*(word.length-1))+1
             console.log(spot)
             var interferenceChars = '_-^\/.,*+'
             
