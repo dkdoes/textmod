@@ -7,6 +7,27 @@ var sad_checkbox = document.getElementById("sad")
 var random_checkbox = document.getElementById("random")
 var char_swap_checkbox = document.getElementById("char_swap")
 
+try{
+    if(localStorage.sad === "true"){
+        $('#sad').bootstrapToggle('on')
+    }
+    else if(localStorage.sad === "false"){
+        $('#sad').bootstrapToggle('off')
+    }
+    if(localStorage.fullwidth === "true"){
+        $('#fullwidth').bootstrapToggle('on')
+    }
+    else if(localStorage.fullwidth === "false"){
+        $('#fullwidth').bootstrapToggle('off')
+    }
+    if(localStorage.random === "true"){
+        $('#random').bootstrapToggle('on')
+    }
+    else if(localStorage.random === "false"){
+        $('#random').bootstrapToggle('off')
+    }
+}catch(err){}
+
 fullwidth_replace = '!"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~'.split('')
 fullwidth_replace_with = '\uff01\uff02\uff03\uff04\uff05\uff06\uff07\uff08\uff09\uff0a\uff0b\uff0c\uff0d\uff0e\uff0f\uff10\uff11\uff12\uff13\uff14\uff15\uff16\uff17\uff18\uff19\uff1a\uff1b\uff1c\uff1d\uff1e\uff1f\uff20\uff21\uff22\uff23\uff24\uff25\uff26\uff27\uff28\uff29\uff2a\uff2b\uff2c\uff2d\uff2e\uff2f\uff30\uff31\uff32\uff33\uff34\uff35\uff36\uff37\uff38\uff39\uff3a\uff3b\uff3c\uff3d\uff3e\uff3f\uff40\uff41\uff42\uff43\uff44\uff45\uff46\uff47\uff48\uff49\uff4a\uff4b\uff4c\uff4d\uff4e\uff4f\uff50\uff51\uff52\uff53\uff54\uff55\uff56\uff57\uff58\uff59\uff5a\uff5b\uff5c\uff5d\uff5e'.split('')
 
@@ -69,11 +90,9 @@ to_random = function(text_in){
     
     //create an array containing all the words (separated by spaces)
     var words = text_in.split(/ +/)
-    console.log(words)
     
     //create a second array containing numbers representing the indices of the first array
     var indices = new Array(words.length+1).join(' ').split('').map(function(a,b){return b})
-    console.log(indices)
     //shuffle the second array
 
     var j, x, i;
@@ -83,7 +102,6 @@ to_random = function(text_in){
         indices[i - 1] = indices[j];
         indices[j] = x;
     }
-    console.log(indices)
     //go through every word and aadd it to text_out
     //using the shuffled array, we make sure just over half
     //of the words will be changed
@@ -92,11 +110,9 @@ to_random = function(text_in){
             var word = words[i]
             //break the word up into letters
             word = word.split('')
-            console.log(word)
             
             //pick a random spot in the word/characters
             var spot = parseInt(Math.random()*(word.length))+1
-            console.log(spot)
             var interferenceChars = '_-^\/.,*'
             
             //pick a random interference character
@@ -133,7 +149,17 @@ to_char_swap = function(text_in){
     return text_out
 }
 
-random_checkbox.onchange = input.oninput
-//char_swap_checkbox.onchange = input.oninput
-fullwidth_checkbox.onchange = input.oninput
-sad_checkbox.onchange = input.oninput
+change_options = function(){
+    input.oninput()
+    try{
+        localStorage.random = random_checkbox.checked
+        localStorage.fullwidth = fullwidth_checkbox.checked
+        localStorage.sad = sad_checkbox.checked
+        //localStorage.char_swap = char_swap_checkbox.checked
+    }catch(err){}
+}
+
+random_checkbox.onchange = change_options
+//char_swap_checkbox.onchange = change_options
+fullwidth_checkbox.onchange = change_options
+sad_checkbox.onchange = change_options
